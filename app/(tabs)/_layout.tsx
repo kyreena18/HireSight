@@ -33,12 +33,19 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="explore"
+        options={{
+          title: 'Jobs',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="magnifyingglass" color={color} />,
+        }}
+      />
       {isRecruiter && (
         <Tabs.Screen
-          name="explore"
+          name="recruiter-search"
           options={{
-            title: 'Browse',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="magnifyingglass" color={color} />,
+            title: 'Search',
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.2.fill" color={color} />,
           }}
         />
       )}
