@@ -63,16 +63,24 @@ def parse_resume_folder(folder_path, recruiter_user_id=None):
                 'years_of_experience': entities.get('years_of_experience', 0),
                 'email': entities.get('email'),
                 'phone': entities.get('phone'),
-                'summary': parsed_data['cleaned_text'][:500],
+                'summary': parsed_data.get('cleaned_text', '')[:500] if parsed_data.get('cleaned_text') else None,
                 'parsed_data': {
-                    'raw_text': parsed_data['raw_text'][:1000],
+                    'raw_text': parsed_data.get('raw_text', '')[:1000] if parsed_data.get('raw_text') else None,
                     'entities': entities
                 }
             }
 
-            successful += 1
-            print(f"  ✓ Successfully parsed {filename}")
-            print(f"    Skills: {', '.join(entities.get('skills', [])[:5])}...")
+            # Insert into database
+            result = supabase_service.insert_resume(resume_data)
+
+            if result:
+                successful += 1
+                print(f"  ✓ Successfully parsed and inserted into database")
+                print(f"    Resume ID: {result.get('id', 'N/A')}")
+                print(f"    Skills: {', '.join(entities.get('skills', [])[:5])}...")
+            else:
+                failed += 1
+                print(f"  ✗ Failed to insert into database")
 
         except Exception as e:
             failed += 1
