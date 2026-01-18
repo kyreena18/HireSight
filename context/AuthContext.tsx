@@ -53,13 +53,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (session?.user) {
         const { id, email } = session.user;
-        
+
         // Fetch profile from profiles table
         const { data: profile, error: profileError } = await supabase
           .from('profiles')
           .select('name, role')
           .eq('id', id)
-          .single();
+          .maybeSingle();
 
         if (profileError) {
           console.error('Error fetching profile:', profileError);
@@ -74,10 +74,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(mappedUser);
         await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(mappedUser));
       } else {
-        const storedUser = await AsyncStorage.getItem(STORAGE_KEY);
-        if (storedUser) {
-          setUser(JSON.parse(storedUser));
-        }
+        // No active session, clear any stored user
+        await AsyncStorage.removeItem(STORAGE_KEY);
+        setUser(null);
       }
     } catch (error) {
       console.error('Error loading user:', error);
@@ -104,7 +103,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .from('profiles')
       .select('name, role')
       .eq('id', id)
-      .single();
+      .maybeSingle();
 
     if (profileError) {
       console.error('Error fetching profile:', profileError);

@@ -84,7 +84,7 @@ export default function LoginScreen() {
           style={styles.linkButton}
           onPress={() => router.push('/register')}>
           <ThemedText style={styles.linkText}>
-            Don't have an account? <ThemedText style={styles.linkTextBold}>Sign Up</ThemedText>
+            Don&apos;t have an account? <ThemedText style={styles.linkTextBold}>Sign Up</ThemedText>
           </ThemedText>
         </TouchableOpacity>
       </ThemedView>

@@ -31,17 +31,35 @@ def index():
         'description': 'AI-Driven Resume Screening and Recruitment Platform'
     }), 200
 
-from routes.resume_routes import resume_bp
-from routes.job_routes import job_bp
-from routes.application_routes import application_bp
-from routes.interview_routes import interview_bp
-from routes.analytics_routes import analytics_bp
+try:
+    from routes.resume_routes import resume_bp
+    app.register_blueprint(resume_bp)
+except Exception as e:
+    print(f"Warning: Could not load resume routes: {e}")
 
-app.register_blueprint(resume_bp)
-app.register_blueprint(job_bp)
-app.register_blueprint(application_bp)
-app.register_blueprint(interview_bp)
-app.register_blueprint(analytics_bp)
+try:
+    from routes.job_routes import job_bp
+    app.register_blueprint(job_bp)
+except Exception as e:
+    print(f"Warning: Could not load job routes: {e}")
+
+try:
+    from routes.application_routes import application_bp
+    app.register_blueprint(application_bp)
+except Exception as e:
+    print(f"Warning: Could not load application routes: {e}")
+
+try:
+    from routes.interview_routes import interview_bp
+    app.register_blueprint(interview_bp)
+except Exception as e:
+    print(f"Warning: Could not load interview routes: {e}")
+
+try:
+    from routes.analytics_routes import analytics_bp
+    app.register_blueprint(analytics_bp)
+except Exception as e:
+    print(f"Warning: Could not load analytics routes: {e}")
 
 @app.errorhandler(404)
 def not_found(error):
