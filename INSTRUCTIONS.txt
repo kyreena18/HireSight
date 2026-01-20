@@ -1,0 +1,120 @@
+╔════════════════════════════════════════════════════════════════╗
+║                    HIRESIGHT DATABASE SETUP                    ║
+║                   3 EASY STEPS - 5 MINUTES                     ║
+╚════════════════════════════════════════════════════════════════╝
+
+STEP 1: CREATE THE 8 TABLES (2 minutes)
+────────────────────────────────────────────────────────────────
+
+1. Open: https://supabase.com/dashboard
+2. Select your project
+3. Click: "SQL Editor" (left sidebar)
+4. Click: "New Query"
+5. Open file: COPY_PASTE_THIS.sql
+6. Copy ALL content (Ctrl+A, Ctrl+C)
+7. Paste into SQL Editor (Ctrl+V)
+8. Click: "Run" button (or press Ctrl+Enter)
+9. Wait 15 seconds
+10. You should see: "✅ SUCCESS! All 8 tables created!"
+
+✅ DONE! You now have all 8 tables with security enabled.
+
+
+STEP 2: CREATE STORAGE BUCKET (1 minute)
+────────────────────────────────────────────────────────────────
+
+1. In Supabase Dashboard, click: "Storage" (left sidebar)
+2. Click: "Create new bucket"
+3. Name: resumes
+4. Public: UNCHECK (keep private)
+5. Click: "Create bucket"
+6. Go back to "SQL Editor"
+7. Open file: STORAGE_POLICIES.sql (you may need to create this)
+8. Copy and paste, then click "Run"
+
+✅ DONE! Storage is ready for resume files.
+
+
+STEP 3: VERIFY SETUP (30 seconds)
+────────────────────────────────────────────────────────────────
+
+Run this in SQL Editor:
+
+    SELECT table_name
+    FROM information_schema.tables
+    WHERE table_schema = 'public'
+    ORDER BY table_name;
+
+Expected output (8 tables):
+  ✓ analysis_results
+  ✓ applications
+  ✓ candidate_status
+  ✓ interviews
+  ✓ job_descriptions
+  ✓ parsed_resumes
+  ✓ profiles
+  ✓ resumes
+
+✅ DONE! Database is ready.
+
+
+THE 8 TABLES YOU JUST CREATED:
+────────────────────────────────────────────────────────────────
+
+1. profiles           - Recruiter accounts
+2. job_descriptions   - Job postings
+3. resumes            - Resume file metadata
+4. parsed_resumes     - Parsed resume data
+5. analysis_results   - AI match scores
+6. candidate_status   - Pipeline tracking
+7. applications       - Application tracking
+8. interviews         - Interview scheduling
+
+
+WHAT'S INCLUDED:
+────────────────────────────────────────────────────────────────
+
+✅ All 8 tables created
+✅ Row Level Security enabled on all tables
+✅ 30+ security policies (users only see their data)
+✅ 15+ indexes for fast queries
+✅ Auto-updating timestamps
+✅ Auto-create profile on signup
+✅ Foreign key relationships
+
+
+NEXT STEPS:
+────────────────────────────────────────────────────────────────
+
+1. Start your app: npm start
+2. Create account: Go to /register
+3. Login and start uploading resumes!
+
+
+TROUBLESHOOTING:
+────────────────────────────────────────────────────────────────
+
+Problem: "relation already exists"
+Fix: Tables already created. Skip this step.
+
+Problem: Can't access data in app
+Fix: Re-run COPY_PASTE_THIS.sql to add security policies
+
+Problem: Can't upload files
+Fix: Make sure storage bucket "resumes" exists and is private
+
+
+FILES YOU NEED:
+────────────────────────────────────────────────────────────────
+
+Essential:
+  → COPY_PASTE_THIS.sql (run this first!)
+  → STORAGE_POLICIES.sql (run this second)
+
+Documentation:
+  → START_HERE.md (full guide)
+  → SQL_FILES_README.md (explains all files)
+
+
+THAT'S IT! YOUR DATABASE IS READY! 🎉
+────────────────────────────────────────────────────────────────
